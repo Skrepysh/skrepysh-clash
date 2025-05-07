@@ -2,8 +2,8 @@
 Description=Clash-Meta Utility by Skrepysh
 
 [Service]
-WorkingDirectory=/opt/skrepysh-clash/files
-ExecStart=/opt/skrepysh-clash/files/skrepysh-clash
+WorkingDirectory=/opt/skrepysh-clash
+ExecStart=/opt/skrepysh-clash/skrepysh-clash
 User=root
 Restart=always
 
