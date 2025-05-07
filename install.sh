@@ -77,4 +77,4 @@ systemctl start skrepysh-clash
 
 # Finishing
 echo -e "\n"
-echo -e "You can access Zashboard here: http://localhost:$DASHBOARD_PORT/#/setup?hostname=localhost&port=$DASHBOARD_PORT&secret=$API_SECRET"
+echo -e "You can access Zashboard here: http://localhost:$DASHBOARD_PORT/ui/#/setup?hostname=localhost&port=$DASHBOARD_PORT&secret=$API_SECRET"
