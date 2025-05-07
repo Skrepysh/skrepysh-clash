@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# ENV VARIABLES #
+source /opt/skrepysh-clash/.env
+
+echo -e "Skrepysh-Clash $VERSION"
+# WAIT FOR THE NETWORK CONNECTION
+echo "Waiting for the internet connection"
+while ! curl ping.archlinux.org > /dev/null 2>&1; do
+    sleep 3
+done
+echo "Connection has been established"
+
+# DOWNLOADING CLASH CONFIG
+echo "Downloading Clash config"
+curl -sL "$SUB_LINK" --max-time 5 --user-agent $USER_AGENT -o $CLASH_DIR/files/config.yml
+
+# STARTING MIHOMO
+if [ -d $CLASH_DIR/files/dist ] && [ -f $CLASH_DIR/files/config.yml ]; then
+    echo "Starting Mihomo"
+    $CLASH_DIR/files/mihomo -v
+    $CLASH_DIR/files/mihomo -f $CLASH_DIR/files/config.yml -ext-ui $CLASH_DIR/files/dist -ext-ctl localhost:"$DASHBOARD_PORT" -secret "$API_SECRET"
+else
+    echo "Config or Zashboard is mising. Exiting"
+    exit 1
+fi

@@ -1,0 +1,11 @@
+[Unit]
+Description=Clash-Meta Utility by Skrepysh
+
+[Service]
+WorkingDirectory=/opt/skrepysh-clash/files
+ExecStart=/opt/skrepysh-clash/files/skrepysh-clash
+User=root
+Restart=always
+
+[Install]
+WantedBy=default.target
