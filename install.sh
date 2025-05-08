@@ -42,6 +42,9 @@ rm $CLASH_DIR/files/zashboard.zip
 echo "Downloading skrepysh-clash executable"
 curl -sL https://raw.githubusercontent.com/Skrepysh/skrepysh-clash/refs/heads/main/skrepysh-clash -o "$CLASH_DIR/skrepysh-clash"
 
+echo "Downloading skrepysh-clash-tool executable"
+curl -sL https://raw.githubusercontent.com/Skrepysh/skrepysh-clash/refs/heads/main/skrepysh-clash-tool -o "$CLASH_DIR/skrepysh-clash-tool"
+
 echo "Downloading .env.example"
 curl -sL https://raw.githubusercontent.com/Skrepysh/skrepysh-clash/refs/heads/main/files/.env.example -o "$CLASH_DIR/.env"
 
@@ -64,6 +67,7 @@ mv "$TEMP_FILE" "$CLASH_DIR/.env"
 echo "Setting permissions"
 chmod +x "$CLASH_DIR/files/mihomo"
 chmod +x "$CLASH_DIR/skrepysh-clash"
+chmod +x "$CLASH_DIR/skrepysh-clash-tool"
 
 # Installing systemd service
 echo "Downloading skrepysh-clash.service"

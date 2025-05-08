@@ -1,0 +1,38 @@
+#!/bin/bash
+
+echo "### Skrepysh-Clash Tool ###"
+
+# Check sudo
+[[ $EUID -ne 0 ]] && echo -e "ERROR: You must be root to run this script! \n" && exit 1
+
+CLASH_DIR=/opt/skrepysh-clash
+
+if [ -f "$CLASH_DIR/.env" ]; then
+    rm "$CLASH_DIR/.env"
+fi
+
+echo "Downloading .env.example"
+curl -sL https://raw.githubusercontent.com/Skrepysh/skrepysh-clash/refs/heads/main/files/.env.example -o "$CLASH_DIR/.env"
+
+# Requesting data from user
+
+read -rp "Enter subscription link: " SUB_LINK
+read -rp "Enter port for Zashboard: " DASHBOARD_PORT
+read -rp "Enter Clash API Secret: " API_SECRET
+
+# Applying data to .env
+TEMP_FILE=$(mktemp)
+{
+  echo "SUB_LINK=\"$SUB_LINK\""
+  echo "DASHBOARD_PORT=\"$DASHBOARD_PORT\""
+  echo "API_SECRET=\"$API_SECRET\""
+} >> "$TEMP_FILE"
+awk '/# Do not edit variables below!/{flag=1} flag' "$CLASH_DIR/.env" >> "$TEMP_FILE"
+mv "$TEMP_FILE" "$CLASH_DIR/.env"
+
+echo "Restarting service"
+systemctl restart skrepysh-clash
+
+# Finishing
+echo -e "\n"
+echo -e "You can access Zashboard here: http://localhost:$DASHBOARD_PORT/ui/#/setup?hostname=localhost&port=$DASHBOARD_PORT&secret=$API_SECRET"

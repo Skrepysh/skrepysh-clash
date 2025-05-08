@@ -6,3 +6,7 @@ curl -L https://raw.githubusercontent.com/Skrepysh/skrepysh-clash/refs/heads/mai
 chmod +x install.sh
 sudo ./install.sh
 ```
+## Modify settings
+```
+sudo /opt/skrepysh-clash/skrepysh-clash-tool
+```
